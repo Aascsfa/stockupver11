@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stock Up Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .item {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Stock Up Calculator</h2>
+    <div id="items">
+      <!-- Stock items will be dynamically added here -->
+    </div>
+    <button onclick="calculateRequiredStock()">Calculate</button>
+  </div>
+
+  <script>
+    function calculateRequiredStock() {
+      var items = document.querySelectorAll('.item');
+      items.forEach(function(item) {
+        var currentStock = parseInt(item.querySelector('.current-stock').value);
+        var requiredStock = Math.max(0, 100 - currentStock); // Adjust this logic as needed
+        item.querySelector('.required-stock').textContent = requiredStock;
+      });
+    }
+
+    // Add initial stock items
+    var stockItems = ["Item 1", "Item 2", "Item 3"]; // Add your stock items here
+    var itemsContainer = document.getElementById('items');
+    stockItems.forEach(function(itemName) {
+      var itemDiv = document.createElement('div');
+      itemDiv.classList.add('item');
+      itemDiv.innerHTML = `
+        <label>${itemName}</label>
+        <input type="number" class="current-stock" placeholder="Current Stock">
+        <span>Required: <span class="required-stock">0</span></span>
+      `;
+      itemsContainer.appendChild(itemDiv);
+    });
+  </script>
+</body>
+</html>
